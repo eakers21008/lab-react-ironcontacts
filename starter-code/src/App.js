@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import contactsJSON from './contacts.json'
 import IronContact from './components/contact/IronContact.js';
-
-
+import { browserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import MainPage from "./pages/index"; 
+import PageNotFound from "./pages/404";
 
 
 class App extends Component {
@@ -112,6 +113,13 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={MainPage}/>
+            <Route path ="/404" component={PageNotFound}/>
+            <Redirect to ="/404"  />
+          </Switch>
+        </Router>
         <div className="top-buttons">
           <button className="btn isSuccess" onClick={() => { this.getRandom() }}>Add Random Contact</button>
           <button className="btn isSuccess" onClick={() => { this.sortByName() }}>Sort By Name</button>
